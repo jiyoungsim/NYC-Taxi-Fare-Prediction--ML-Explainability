@@ -25,14 +25,14 @@
 
     + Partial Dependence Plots: while feature importance shows what variables most affect predictions, partial dependence plots show how a feature affects predictions. Partial dependence plots repeatedly alter the value for one variable to make a series of predictions and trace out predicted outcomes.
         
-        <img src="figs/pdp_pickup_longitude.png" width="300"> <img src="figs/pdp_pickup_latitude.png" width="300">
+        <img src="figs/pdp_pickup_longitude.png" width="500"> <img src="figs/pdp_pickup_latitude.png" width="500">
         
         We have a sense from the permutation importance results that **distance is the most important determinant of taxi fare**.
         This model didn't include distance measures (like absolute change in latitude or longitude) as features, so coordinate features (like pickup_longitude) capture the effect of distance. Being picked up near the center of the longitude values lowers predicted fares on average, because it means shorter trips (on average).
 
         For the same reason, we see the general U-shape in all our partial dependence plots for latitude/longitude.
         
-        <img src="figs/pdp_passenger_count.png" width="300">
+        <img src="figs/pdp_passenger_count.png" width="500">
         
         We can also observe that the **number of passengers is positively related to the fare**. In the results from permutation importance, we saw that the number of passengers have very low feature importance:
         + Positive relationship between a feature and target does not necessarily indicate high permutation importance.
@@ -41,10 +41,10 @@
         + From the histogram below, we can see that the majority of the numer of passengers is 1.
         + Also, the slope of the relationship is gradual. Although there seems to be a positive relationship between the feature and the target, the impact can be small.
         
-        <img src="figs/passengers_by_dow.png" width="300">
+        <img src="figs/passenger_by_dow.png" width="500">
         
         
-        <img src="figs/2D_pdp_1.png" width="300">  <img src="figs/2D_pdp_2.png" width="300">
+        <img src="figs/2d_pdp_1.png" width="500">  <img src="figs/2d_pdp_2.png" width="500">
         In 2D partial dependent plots, diagonal contours are expected to be seen in the above plots because these are pairs of values where the pickup and dropoff longitudes/latitudes are nearby, indicating shorter trips (controlling for other factors). Prices are expected to increase as you get further from the central diagonal, as the distances between the pickup and dropoff longitudes/latitudes also increase.
 
         While we can see that trend in the above plots, we can also see that prices increase as you go further to the upper-right of the longitude graph, and as you go to the lower-left of the latitude graph.
@@ -65,15 +65,15 @@
       
     + Changes in Partial Dependence Plots
     
-    <img src="figs/pdp_pickup_longitude.png" width="300"> <img src="figs/pdp_pickup_longitude_2.png" width="300">
+    <img src="figs/pdp_pickup_longitude.png" width="500"> <img src="figs/pdp_pickup_longitude_2.png" width="500">
     
-    <img src="figs/pdp_pickup_latitude.png.JPG" width="300"> <img src="figs/pdp_pickup_latitude_2.png.JPG" width="300">
+    <img src="figs/pdp_pickup_latitude.png" width="500"> <img src="figs/pdp_pickup_latitude_2.png" width="500">
     
     From the graphs above, we can see that the slope of the partial dependence plot became much gradual. Once you control for absolute distance traveled, the pickup_longitude has only a very small impact on predictions.
 
     + PDP for New Features: The relationships are both positive. We can also see that the slope is steeper for latitude distance, which indicates it costs more to travel a fixed latitudinal distance than traveling the same longitudinal distance.
     
-    <img src="figs/pdp_abs_lon_dist.png" width="300"> <img src="figs/pdp_abs_lat_dist.png" width="300">
+    <img src="figs/pdp_abs_lon_dist.png" width="500"> <img src="figs/pdp_abs_lat_dist.png" width="500">
     
     + SHAP Values: We have extracted general insights from the model. Let's now break down how the model works for each individual prediction. SHAP vaue is an estimate of the impact of a given feature on the prediction; it interprets the impact of having certain value for a given feature in comparison to the prediction we'd make if that feature took some baseline value.
 
@@ -83,7 +83,7 @@
     
     It's not important to show every feature with every miniscule impact on the fare. It's fine to focus on only the most important features.
     
-    <img src="figs/SHAP1.png" width="600">  <img src="figs/SHAP2.png" width="600">
+    <img src="figs/SHAP1.png" width="800">  <img src="figs/SHAP2.png" width="800">
     
     Let's take one example of one-passenger ride and one example of six-passenger-ride. As we saw from partial dependence plots, we can see that for one-passenger ride the number of passengers have minimal importance. However, in six-passenger ride, the number of passengers had the highest positive impact. Like this, **a feature that has low impact in the overall prediction power might have high impact in individual prediction point**.
 
@@ -91,20 +91,20 @@
 
     Due to these reasons, analyzing individual predictions may also be important depending on the purpose of the model. For example, the insights from this section can be valuable to companies in mobility industry that provide personalized services to each customer.
     
-      + SHAP Summary Plots give us a birds-eye view of feature importance and what is driving it. Each dot has the following characteristics:
-        + Vertical location shows what feature it is depicting
-        + Color shows whether that feature was high or low for that row of the dataset
-        + Horizontal location shows whether the effect of that value caused a higher or lower prediction.
-      
-      <img src="figs/SHAP_summary.png" width="300">
-      
-      Here, the longitude/latitude distance features are the most widely spread. In these features, points with low feature values have low SHAP values, while points with high feature values have high SHAP values. The width of the effects range is not a reasonable approximation to permutation importance. For that matter, the width of the range doesn't map well to any intuitive sense of "importance" because it can be determined by just a few outliers. However if all dots on the graph are widely spread from each other, that is a reasonable indication that permutation importance is high. Because the range of effects is so sensitive to outliers, permutation importance is a better measure of what's generally important to the model.
+  + SHAP Summary Plots give us a birds-eye view of feature importance and what is driving it. Each dot has the following characteristics:
+    + Vertical location shows what feature it is depicting
+    + Color shows whether that feature was high or low for that row of the dataset
+    + Horizontal location shows whether the effect of that value caused a higher or lower prediction.
 
-      While in some features we can see reasonably clear separation between the blue and pink dots, in other variables dots are jumbled together. This suggests that sometimes increasing that feature leads to higher predictions, and other times it leads to a lower prediction. The most likely explanation for this effects is that the variable has an interaction effect with other variables.
+  <img src="figs/SHAP_summary.png" width="600">
+
+  Here, the longitude/latitude distance features are the most widely spread. In these features, points with low feature values have low SHAP values, while points with high feature values have high SHAP values. The width of the effects range is not a reasonable approximation to permutation importance. For that matter, the width of the range doesn't map well to any intuitive sense of "importance" because it can be determined by just a few outliers. However if all dots on the graph are widely spread from each other, that is a reasonable indication that permutation importance is high. Because the range of effects is so sensitive to outliers, permutation importance is a better measure of what's generally important to the model.
+
+  While in some features we can see reasonably clear separation between the blue and pink dots, in other variables dots are jumbled together. This suggests that sometimes increasing that feature leads to higher predictions, and other times it leads to a lower prediction. The most likely explanation for this effects is that the variable has an interaction effect with other variables.
       
     + SHAP Dependence Contribution Plots: using SHAP Dependence Contribution Plots, we can not only observe the relationship between SHAP value for a feature and the feature but also interactions a feature has with other features.
     
-    <img src="figs/SHAP_dependence_1.png" width="300"> <img src="figs/SHAP_dependence_2.png" width="300">
+    <img src="figs/SHAP_dependence_1.png" width="500"> <img src="figs/SHAP_dependence_2.png" width="500">
     
     The graphs slope upward, meaning the larger the distance, the higher the model's prediction for fare is. The graphs also suggest feature interactions. We can see from the first graph that when the longitude distance is small, SHAP value for longitude distance does not show much difference whether the latitude distance is large/small. However, when the longitude distance is large, there is a slight tendency of fare predictions being larger when latitude distance is smaller. Similar tendency shows in the second graph as well, although it is less obvious than in the first graph.
 
