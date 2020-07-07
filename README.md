@@ -11,11 +11,9 @@
     These insights not only help human understanding of machine learning models but also help find directions for model improvements.
 
 + **Summary**: In this project, we will focus on model explainability techniques rather than building and optimizing the model. So here we just used a simple random forest model to keep it easy.
-    + **Permutation Importance**: randomly re-ordering a single column should cause less accurate predictions, since the resulting data no longer corresponds to anything observed in the real world. Model accuracy especially suffers if we shuffle a column that the model relied on heavily for predictions. Thus, permutation importance gives us **what features have the biggest impact on predictions**, or **feature importance**.
+    + **Permutation Importance**: randomly re-ordering a single column should cause less accurate predictions, since the resulting data no longer corresponds to anything observed in the real world. Permutation importance gives us **what features have the biggest impact on predictions**, or **feature importance**.
     
       <img src="figs/permutation_importance_1.JPG" width="300">
-
-      The values towards the top are the most important features, and those towards the bottom matter least. The first number in each row shows how much model performance decreased with a random shuffling.
 
       In the example above, we can tell while pick up locations and drop off locations are all important features, passenger count does not have much importance in the model. Also, it seems that latitude have more importance than longitude:
 
@@ -23,14 +21,11 @@
       + It could also be that tolls might be more expensive on vertical roads than horizontal roads.
       + Another possibility is that the pricing may vary by different parts of the city.
 
-    + **Partial Dependence Plots**: while feature importance shows what variables most affect predictions, partial dependence plots show how a feature affects predictions. Partial dependence plots repeatedly alter the value for one variable to make a series of predictions and trace out predicted outcomes.
+    + **Partial Dependence Plots**: show how a feature affects predictions. Partial dependence plots repeatedly alter the value for one variable to make a series of predictions and trace out predicted outcomes.
         
         <img src="figs/pdp_pickup_longitude.png" width="350"> <img src="figs/pdp_pickup_latitude.png" width="350">
         
-        We have a sense from the permutation importance results that **distance is the most important determinant of taxi fare**.
-        This model didn't include distance measures (like absolute change in latitude or longitude) as features, so coordinate features (like pickup_longitude) capture the effect of distance. Being picked up near the center of the longitude values lowers predicted fares on average, because it means shorter trips (on average).
-
-        For the same reason, we see the general U-shape in all our partial dependence plots for latitude/longitude.
+        We have a sense from the permutation importance results that **distance is the most important determinant of taxi fare**. The model didn't include distance measures as features, so coordinate features capture the effect of distance. Being picked up near the center of the longitude values lowers predicted fares on average, because it means shorter trips (on average). For the same reason, we see the general U-shape in all our partial dependence plots for latitude/longitude.
         
         <img src="figs/pdp_passenger_count.png" width="400">
         
@@ -46,11 +41,7 @@
         
         <img src="figs/2d_pdp_1.png" width="350">  <img src="figs/2d_pdp_2.png" width="350">
         
-        In **2D partial dependent plots**, diagonal contours are expected to be seen in the above plots because these are pairs of values where the pickup and dropoff longitudes/latitudes are nearby, indicating shorter trips (controlling for other factors). Prices are expected to increase as you get further from the central diagonal, as the distances between the pickup and dropoff longitudes/latitudes also increase.
-
-        While we can see that trend in the above plots, we can also see that prices increase as you go further to the upper-right of the longitude graph, and as you go to the lower-left of the latitude graph.
-
-        This could be worth further investigation, though the effect is small compared to moving away from the central diagonal line.
+        In **2D partial dependent plots**, diagonal contours are expected to be seenbecause these are pairs of values where the pickup and dropoff longitudes/latitudes are nearby, indicating shorter trips. While we can see that trend in the above plots, we can also see that prices increase as you go further to the upper-right of the longitude graph, and as you go to the lower-left of the latitude graph. This could be worth further investigation, though the effect is small compared to moving away from the central diagonal line.
 
     + **New Features**: new features are created based on the results and insights above. The new features are **longitude/latitude distances**. Since we only have seven features includeing the new features here, we'll keep all features. When there are too many features and the computational expense is high or when we are working with models that are more likely to overfit, we can use the above technique and insights for feature selection.
     
@@ -63,7 +54,7 @@
          + It is more expensive to travel a fixed latitudinal distance
          + Both of the above
       
-    + Changes in Partial Dependence Plots
+    + **Changes in Partial Dependence Plots**
     
         <img src="figs/pdp_pickup_longitude.png" width="350"> <img src="figs/pdp_pickup_longitude_2.png" width="350">
     
@@ -75,13 +66,11 @@
     
     <img src="figs/pdp_abs_lon_dist.png" width="350"> <img src="figs/pdp_abs_lat_dist.png" width="350">
     
-    + **SHAP Values**: We have extracted general insights from the model. Let's now break down how the model works for each individual prediction. SHAP vaue is an estimate of the impact of a given feature on the prediction; it interprets the impact of having certain value for a given feature in comparison to the prediction we'd make if that feature took some baseline value.
+    + **SHAP Values**: An estimate of the impact of a given feature on the prediction. It interprets the impact of having certain value for a given feature in comparison to the prediction we'd make if that feature took some baseline value.
 
         SHAP values are generated by the following process:
         + Takes a single row with passenger data (of the same format you as raw data).
         + Creates a visualization showing what features of that passenger increased/decreased the fare and how much those features mattered.
-    
-        It's not important to show every feature with every miniscule impact on the fare. It's fine to focus on only the most important features.
     
         <img src="figs/SHAP1.png" width="800">  <img src="figs/SHAP2.png" width="800">
     
