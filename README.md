@@ -79,7 +79,7 @@
   + Generated new features based on the insights in order to make improvements to the baseline model.
   + The focus of this project is on Machine Learning explainability. Thus the model itself has not been optimized/tuned for the purpose of this project. See other projects for more on model building and tuning.
   
-+ **Keywords: Machine Learning Explainability, Permutation Importance, Partial Dependence, SHAP Values, Python**
++ **Keywords: Machine Learning Explainability, Data Visualization, Permutation Importance, Partial Dependence, SHAP Values, Python**
 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
