@@ -54,14 +54,14 @@
 
     + New Features: new features are created based on the results and insights above. The new features are longitude/latitude distances. Since we only have seven features includeing the new features here, we'll keep all features. When there are too many features and the computational expense is high or when we are working with models that are more likely to overfit, we can use the above technique and insights for feature selection.
     
-    <img src="figs/permutation_importance_2.JPG" width="300">
+        <img src="figs/permutation_importance_2.JPG" width="300">
     
-     While both features for distances had higher feature importances than location features, latitude distances are more important than longitude distances. This does not give us information on whether traveling a fixed latitudinal distance is more or less expensive than traveling the same longitudinal distance.
+        While both features for distances had higher feature importances than location features, latitude distances are more important than longitude distances. This does not give us information on whether traveling a fixed latitudinal distance is more or less expensive than traveling the same longitudinal distance.
 
-     Possible reasons latitude feature are more important than longitude features:
-          + Latitudinal distances in the dataset tend to be larger
-          + It is more expensive to travel a fixed latitudinal distance
-          + Both of the above
+         Possible reasons latitude feature are more important than longitude features:
+         + Latitudinal distances in the dataset tend to be larger
+         + It is more expensive to travel a fixed latitudinal distance
+         + Both of the above
       
     + Changes in Partial Dependence Plots
     
@@ -96,13 +96,13 @@
     + Color shows whether that feature was high or low for that row of the dataset
     + Horizontal location shows whether the effect of that value caused a higher or lower prediction.
 
-  <img src="figs/SHAP_summary.png" width="600">
+    <img src="figs/SHAP_summary.png" width="600">
 
-    Here, the longitude/latitude distance features are the most widely spread. In these features, points with low feature values have low SHAP values, while points with high feature values have high SHAP values. The width of the effects range is not a reasonable approximation to permutation importance. For that matter, the width of the range doesn't map well to any intuitive sense of "importance" because it can be determined by just a few outliers. However if all dots on the graph are widely spread from each other, that is a reasonable indication that permutation importance is high. Because the range of effects is so sensitive to outliers, permutation importance is a better measure of what's generally important to the model.
+       Here, the longitude/latitude distance features are the most widely spread. In these features, points with low feature values have low SHAP values, while points with high feature values have high SHAP values. The width of the effects range is not a reasonable approximation to permutation importance. For that matter, the width of the range doesn't map well to any intuitive sense of "importance" because it can be determined by just a few outliers. However if all dots on the graph are widely spread from each other, that is a reasonable indication that permutation importance is high. Because the range of effects is so sensitive to outliers, permutation importance is a better measure of what's generally important to the model.
 
-    While in some features we can see reasonably clear separation between the blue and pink dots, in other variables dots are jumbled together. This suggests that sometimes increasing that feature leads to higher predictions, and other times it leads to a lower prediction. The most likely explanation for this effects is that the variable has an interaction effect with other variables.
+       While in some features we can see reasonably clear separation between the blue and pink dots, in other variables dots are jumbled together. This suggests that sometimes increasing that feature leads to higher predictions, and other times it leads to a lower prediction. The most likely explanation for this effects is that the variable has an interaction effect with other variables.
       
-    + SHAP Dependence Contribution Plots: using SHAP Dependence Contribution Plots, we can not only observe the relationship between SHAP value for a feature and the feature but also interactions a feature has with other features.
+   + SHAP Dependence Contribution Plots: using SHAP Dependence Contribution Plots, we can not only observe the relationship between SHAP value for a feature and the feature but also interactions a feature has with other features.
     
         <img src="figs/SHAP_dependence_1.png" width="400"> <img src="figs/SHAP_dependence_2.png" width="400">
     
