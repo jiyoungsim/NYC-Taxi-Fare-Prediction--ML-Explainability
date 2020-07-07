@@ -2,6 +2,8 @@
 
 + This project was conducted by Young Sim.
 
++ **Keywords: Machine Learning Explainability, Data Visualization, Permutation Importance, Partial Dependence, SHAP Values, Python**
+
 + **Objectives**: The goal of this porject is to extract human-understandable insights from machine learning models by using techniques like permutation importance, partial dependence plots, and SHAP values. The following insights can be driven by using these methods:
 
     + What features in the were most important in the corresponding model?
@@ -78,8 +80,6 @@
   + Used techniques like permutation importance, partial dependence plots, and SHAP values to extract human-understandable insights from models, such as feature importance and how each feature affects predictions, both in big-picture sense and for particular prediction points.
   + Generated new features based on the insights in order to make improvements to the baseline model.
   + The focus of this project is on Machine Learning explainability. Thus the model itself has not been optimized/tuned for the purpose of this project. See other projects for more on model building and tuning.
-  
-+ **Keywords: Machine Learning Explainability, Data Visualization, Permutation Importance, Partial Dependence, SHAP Values, Python**
 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
