@@ -2,7 +2,7 @@
 
 + This project was conducted by Young Sim.
 
-+ **Keywords: Machine Learning Explainability, Data Visualization, Permutation Importance, Partial Dependence, SHAP Values, Python**
++ **Keywords: Machine Learning Explainability, Data Visualization, Permutation Importance, Partial Dependence Plots, SHAP Values, Python**
 
 + **Objectives**: The goal of this porject is to extract human-understandable insights from machine learning models by using techniques like permutation importance, partial dependence plots, and SHAP values. The following insights can be driven by using these methods:
 
